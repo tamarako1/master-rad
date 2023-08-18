@@ -1,5 +1,5 @@
 <template>
-  <div class="background-image">
+  <div class="home_style">
     <v-container class="position">
       <v-row class="kolona">
         <v-col>
@@ -19,12 +19,7 @@
 
 <script></script>
 <style>
-.background-image {
-  background-image: url("@/assets/white-car.jpg");
-  background-size: cover; /* Da bi se slika skalirala da prekrije celu površinu */
-  background-position: center; /* Da bi slika bila centrirana */
-  width: 100%; /* Da bi element zauzeo celu širinu ekrana */
-  height: 100vh; /* Da bi element zauzeo celu visinu ekrana */
+.home_style {
   font-size: 50px; /* Promenite vrednost prema vašim potrebama */
   justify-content: center;
   height: 100%; /* Opciono, da bi kolona zauzimala celu visinu ekrana */
@@ -55,9 +50,8 @@
   display: block;
   font-size: 35px;
   /* color-interpolation-filters: auto; */
-  /* color: rgb(0, 30, 255); */
-  text-decoration: none; /*da nema podvuceno*/
+  /* color: rgba(0, 0, 0, 1); */
+  /* text-decoration: none; da nema podvuceno */
   font-weight: bold;
-  /* color: black; */ /**ne radi */
 }
 </style>

@@ -26,8 +26,7 @@ export default {
   width: 100%; /* Da bi element zauzeo celu širinu ekrana */
   height: 100vh; /* Da bi element zauzeo celu visinu ekrana */
   overflow: hidden; /* Onemogućite klizanje unutar kontejnera */
-  color: black;
-  /* Dodajte ostale stilove ili klase po potrebi */
+  /* color: black; */
 }
 .fullscreen-container {
   height: 100vh; /* Visina ekrana */

@@ -34,10 +34,10 @@
         <v-row justify="center">
           <v-card
             margin-top="50px"
-            color="rgba(220, 220, 220, 0.6)"
+            color="rgba(220, 220, 220, 0.7)"
             width="600px"
           >
-            <v-card-text class="text-h6 py-2 color-black">{{
+            <v-card-text class="show_steps">{{
               listOfchoosenSteps
             }}</v-card-text>
           </v-card>
@@ -76,7 +76,11 @@ export default {
   },
   computed: {
     listOfchoosenSteps() {
-      return this.allSteps; //this.$store.getters.getListOfchoosenSteps;
+      let stepsString = "steps:";
+      this.allSteps.forEach((step) => {
+        stepsString = stepsString + " " + step + ", ";
+      });
+      return stepsString;
     },
   },
   methods: {
@@ -131,12 +135,18 @@ export default {
 }
 .text_style3 {
   display: block;
-  font-size: 30px;
+  font-size: 25px;
   color-interpolation-filters: auto;
   margin-top: 10px;
   margin-bottom: 20px;
   align-content: center;
   text-align: center;
+  /* color: black; */ /**ovde je dobro, ali necu samo ovde da bude */
+}
+
+.show_steps {
+  font-size: 1.25rem; /* Primer za text-h6 */
+  padding-top: 8px; /* Primer za py-2 */
   color: black;
 }
 </style>
