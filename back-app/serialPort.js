@@ -1,15 +1,12 @@
 const { SerialPort } = require("serialport"); //obavezno zagrade kod {SerialPort}, inace kaze da SerialPOrt nije konstruktor
 
 const portName = "COM11"; // stavi odgovarajući serijski
-const baudRate = 1200;
+const baudRate = 9600; //1200;
 
 const port = new SerialPort(
   {
     path: portName,
     baudRate: baudRate,
-    // dataBits: 8,
-    // stopBits: 1,
-    // parity: "none",
   },
   function (err) {
     if (err) {

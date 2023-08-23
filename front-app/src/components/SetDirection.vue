@@ -44,14 +44,35 @@
         </v-row>
         <v-row justify="center">
           <v-btn
-            @click="sendDirection"
+            @click="deleteStep"
             height="57"
             width="200"
             color="rgba(220, 220, 220, 0.7)"
             rounded
             class="my-custom-margin"
-            >SUBMIT</v-btn
+            >DELETE STEP</v-btn
           >
+          <v-flex xs6 sm3></v-flex>
+          <v-btn
+            @click="deleteAll"
+            height="57"
+            width="200"
+            color="rgba(220, 220, 220, 0.7)"
+            rounded
+            class="my-custom-margin"
+            >DELETE ALL</v-btn
+          >
+          <v-row justify="center">
+            <v-btn
+              @click="sendDirection"
+              height="57"
+              width="200"
+              color="rgba(220, 220, 220, 0.7)"
+              rounded
+              class="my-custom-margin"
+              >SUBMIT</v-btn
+            >
+          </v-row>
         </v-row>
       </v-col>
     </v-row>
@@ -115,6 +136,16 @@ export default {
           });
           break;
       }
+    },
+    deleteStep() {
+      console.log("delete");
+      this.allSteps.pop();
+      this.$store.dispatch("deleteStep");
+    },
+    deleteAll() {
+      console.log("delete all");
+      this.allSteps.splice(0, this.allSteps.length);
+      this.$store.dispatch("deleteAll");
     },
     sendDirection() {
       this.$store.dispatch("sendDirection");

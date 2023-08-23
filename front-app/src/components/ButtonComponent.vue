@@ -2,19 +2,8 @@
   <div>
     <v-row justify="center">
       <v-btn
-        id="turbo"
-        class="btn-style"
-        @click="clickedButton('t')"
-        height="72"
-        width="250"
-        color="rgba(230, 230, 230, 0.8)"
-        rounded
-        >TURBO</v-btn
-      >
-    </v-row>
-    <v-row justify="center">
-      <v-btn
         id="up"
+        class="btn-style-up"
         @click="clickedButton('u')"
         height="72"
         width="250"
@@ -54,7 +43,7 @@
         width="250"
         color="rgba(230, 230, 230, 0.7)"
         rounded
-        class="btn-style"
+        class="btn-style-down"
         >DOWN</v-btn
       >
     </v-row>
@@ -70,19 +59,42 @@ export default {
     return {
       butonClicked: "",
       isActive: false,
+      interval: null,
     };
   },
   methods: {
     clickedButton(button) {
       this.$store.dispatch("clickedButton", button);
     },
+    //kada se komande salju preko mtastature slace se drugacija slova da bi se u C aplikaciji stalno slala komanda, a ne na 1500ms
+    handleKeyPress(event) {
+      if (event.key === "ArrowUp") {
+        this.clickedButton("g");
+      } else if (event.key === "ArrowDown") {
+        this.clickedButton("h");
+      } else if (event.key === "ArrowLeft") {
+        this.clickedButton("j");
+      } else if (event.key === "ArrowRight") {
+        this.clickedButton("k");
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("keydown", this.handleKeyPress);
+  },
+  beforeDestroy() {
+    window.removeEventListener("keydown", this.handleKeyPress);
   },
 };
 </script>
 
 <style>
-.btn-style {
-  margin-bottom: 20px; /* Prilagodite vrednost prema potrebi */
+.btn-style-up {
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+.btn-style-down {
+  margin-bottom: 20px;
   margin-top: 20px;
 }
 .text-style2 {

@@ -7,28 +7,20 @@ export default new Vuex.Store({
   state: {
     button: "",
     direction: [],
-    // clientName: "",
-    // objectName: "",
-    // objectProperties: "",
-    // snackbarState: false,
-    // snackbarText: "",
   },
   mutations: {
-    ADD_DIRECTION(state, direction) {
+    ADD_STEP(state, direction) {
       state.direction.push(direction);
     },
+    REMOVE_STEP(state) {
+      state.direction.pop();
+    },
+    DELETE_ALL_STEPS(state) {
+      state.direction.length = 0;
+    },
   },
-  actions: {
-    // addObject(
-    //   { commit, dispatch },
-    //   { clientName, objectName, objectProperties }
-    // ) {
-    //   commit("ADD_NODE_NAME", clientName);
-    //   commit("ADD_OBJECT_NAME", objectName);
-    //   commit("ADD_OBJECT_PROPERTIES", objectProperties);
 
-    //   dispatch("addNewObjectToFollow", { clientName, objectName });
-    // },
+  actions: {
     async clickedButton({ state }, button) {
       console.log("button", button);
       state.button = button;
@@ -47,10 +39,19 @@ export default new Vuex.Store({
     addStep({ commit, getters }, { step, direction }) {
       console.log("metoda add step");
       const movement = step + "-" + direction;
-      commit("ADD_DIRECTION", movement);
+      commit("ADD_STEP", movement);
       console.log("state.direction: ", getters.getDirection);
     },
-
+    deleteStep({ commit, getters }) {
+      console.log("metoda delete step");
+      commit("REMOVE_STEP");
+      console.log("state.direction: ", getters.getDirection);
+    },
+    deleteAll({ commit, getters }) {
+      console.log("metoda delete all");
+      commit("DELETE_ALL_STEPS");
+      console.log("state.direction: ", getters.getDirection);
+    },
     async sendDirection({ getters }) {
       console.log("send direction metoda ");
       try {
