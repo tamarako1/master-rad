@@ -66,7 +66,7 @@ export default {
     clickedButton(button) {
       this.$store.dispatch("clickedButton", button);
     },
-    //kada se komande salju preko mtastature slace se drugacija slova da bi se u C aplikaciji stalno slala komanda, a ne na 1500ms
+    //kada se komande salju preko tastature slace se drugacija slova da bi se u C aplikaciji stalno slala komanda, a ne na 1500ms
     handleKeyPress(event) {
       if (event.key === "ArrowUp") {
         this.clickedButton("g");

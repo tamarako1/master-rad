@@ -9,7 +9,7 @@
           >
           <v-spacer></v-spacer>
           <router-link to="/direction" class="text_style"
-            >Set the route for car</router-link
+            >Set the route for the car</router-link
           >
         </v-col>
       </v-row>
@@ -49,9 +49,6 @@
 .text_style {
   display: block;
   font-size: 35px;
-  /* color-interpolation-filters: auto; */
-  /* color: rgba(0, 0, 0, 1); */
-  /* text-decoration: none; da nema podvuceno */
   font-weight: bold;
 }
 </style>

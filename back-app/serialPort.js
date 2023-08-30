@@ -1,7 +1,7 @@
-const { SerialPort } = require("serialport"); //obavezno zagrade kod {SerialPort}, inace kaze da SerialPOrt nije konstruktor
+const { SerialPort } = require("serialport");
 
-const portName = "COM11"; // stavi odgovarajući serijski
-const baudRate = 9600; //1200;
+const portName = "COM11";
+const baudRate = 9600;
 
 const port = new SerialPort(
   {
@@ -37,32 +37,8 @@ port.on("error", function (err) {
   console.log("Error: ", err.message);
 });
 
-/*
-port.write("Hi Mom!"); //send string
-port.write(Buffer.from("Hi Mom!")); //send buffer
-*/
-
 port.on("readable", function () {
   console.log("Response:", port.read().toString("utf-8"));
 });
-
-/*
-// Read data that is available but keep the stream in "paused mode"
-port.on("readable", function () {
-  console.log("Data:", port.read());
-});
-
-// Switches the port into "flowing mode"
-port.on("data", function (data) {
-  console.log("Data:", data);
-});
-
-// Pipe the data into another stream (like a parser or standard out)
-const lineStream = port.pipe(new Readline());
-
-//moze i ovako
-//const parser = port.pipe(new ReadlineParser()) //gde je ReadlineParser importovan const { SerialPort, ReadlineParser } = require('serialport')
-
-*/
 
 module.exports = { sendDirection };

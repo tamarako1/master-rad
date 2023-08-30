@@ -104,6 +104,9 @@ export default {
       return stepsString;
     },
   },
+  created() {
+    this.deleteAll();
+  },
   methods: {
     addStep(direction) {
       switch (direction) {
