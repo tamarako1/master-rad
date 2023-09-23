@@ -88,7 +88,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .btn-style-up {
   margin-bottom: 20px;
   margin-top: 100px;
@@ -105,6 +105,6 @@ export default {
   margin-bottom: 20px;
   align-content: center;
   text-align: center;
-  color: black;
+  color: #212121;
 }
 </style>

@@ -35,12 +35,29 @@
           <v-card
             margin-top="50px"
             color="rgba(220, 220, 220, 0.7)"
-            width="600px"
+            width="700px"
           >
             <v-card-text class="show_steps">{{
               listOfchoosenSteps
             }}</v-card-text>
           </v-card>
+          <v-select
+            id="trajectories"
+            class="trajectory"
+            :items="trajectories"
+            label="Choose trajectory"
+            v-model="choosenTrajectory"
+            @change="updateSteps()"
+          ></v-select>
+          <v-btn
+            @click="deleteTrajectoryyFromDb"
+            height="50"
+            width="200"
+            color="rgba(220, 220, 220, 0.7)"
+            rounded
+            class="delete-trajectory-margin"
+            >DELETE TRAJECTORY</v-btn
+          >
         </v-row>
         <v-row justify="center">
           <v-btn
@@ -88,16 +105,18 @@ export default {
   data() {
     return {
       steps: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      trajectories: ["putanja1", "putanja2"],
       choosenStepUp: [],
       choosenStepLeft: [],
       choosenStepRight: [],
       choosenStepDown: [],
       allSteps: [],
+      choosenTrajectory: "",
     };
   },
   computed: {
     listOfchoosenSteps() {
-      let stepsString = "steps:";
+      let stepsString = "Steps:";
       this.allSteps.forEach((step) => {
         stepsString = stepsString + " " + step + ", ";
       });
@@ -106,8 +125,46 @@ export default {
   },
   created() {
     this.deleteAll();
+    this.$store.dispatch("getListOfTrajectories");
+    this.trajectories = this.$store.getters.getTrajectories;
   },
   methods: {
+    async deleteTrajectoryyFromDb() {
+      await this.$store.dispatch("deleteTrajectory", {
+        trajectory: this.choosenTrajectory,
+      });
+      this.trajectories.splice(0, this.trajectories.length);
+      this.$store.dispatch("getListOfTrajectories");
+      this.trajectories = this.$store.getters.getTrajectories;
+      console.log("lista posle brisanja trajektorije", this.trajectories);
+    },
+    updateSteps() {
+      this.deleteAll();
+      let movement = this.choosenTrajectory.split(",");
+      movement.forEach((mov) => {
+        this.allSteps.push(mov);
+
+        let [step, direction] = mov.split("-");
+        switch (direction) {
+          case "up":
+            direction = "u";
+            break;
+          case "left":
+            direction = "l";
+            break;
+          case "right":
+            direction = "r";
+            break;
+          case "down":
+            direction = "d";
+            break;
+        }
+        this.$store.dispatch("addStep", {
+          step,
+          direction,
+        });
+      });
+    },
     addStep(direction) {
       switch (direction) {
         case "u":
@@ -151,7 +208,7 @@ export default {
       this.$store.dispatch("deleteAll");
     },
     sendDirection() {
-      this.$store.dispatch("sendDirection");
+      this.$store.dispatch("openTrajectoryDialog");
     },
   },
 };
@@ -167,19 +224,35 @@ export default {
   margin-top: 20px;
   margin-bottom: 20px; /* Prilagodite vrednost prema potrebi */
 }
+
+.delete-trajectory-margin {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.trajectory {
+  height: 50px;
+  width: 400px;
+  max-width: 80%;
+  margin-top: 10px;
+  background-color: rgba(220, 220, 220, 0.7);
+  font-size: 17px;
+  border-radius: 6px;
+}
 .text_style3 {
   display: block;
-  font-size: 25px;
+  font-size: 20px;
   color-interpolation-filters: auto;
   margin-top: 10px;
   margin-bottom: 20px;
   align-content: center;
   text-align: center;
-  /* color: black; */ /**ovde je dobro, ali necu samo ovde da bude */
+  color: #212121; /**ovde je dobro, ali necu samo ovde da bude */
 }
 
 .show_steps {
-  font-size: 1.25rem; /* Primer za text-h6 */
+  font-size: 1.1rem; /* Primer za text-h6 */
   padding-top: 8px; /* Primer za py-2 */
   color: black;
 }

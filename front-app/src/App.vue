@@ -3,15 +3,22 @@
     <v-main>
       <div class="background-image">
         <router-view />
+        <trajectory-dialog></trajectory-dialog>
+        <snackbar-component></snackbar-component>
       </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import TrajectoryDialog from "@/components/TrajectoryDialog.vue";
+import SnackbarComponent from "@/components/SnackbarComponent.vue";
 export default {
   name: "App",
-  components: {},
+  components: {
+    TrajectoryDialog,
+    SnackbarComponent,
+  },
   data: () => ({
     //
   }),
